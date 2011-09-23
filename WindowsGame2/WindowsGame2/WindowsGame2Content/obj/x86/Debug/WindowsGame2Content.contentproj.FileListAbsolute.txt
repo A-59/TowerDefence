@@ -1,0 +1,2 @@
+D:\Pizdec\WindowsGame2\WindowsGame2\WindowsGame2Content\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2Content\obj\x86\Debug\ResolveAssemblyReference.cache
