@@ -3,10 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logic
+
+namespace LogicOld
 {
-    public class BlockProperties
+    public class Block
     {
+        private Point _point;
+
+        public Point Point
+        {
+            get { return _point; }
+            set { _point = value; }
+        }
+
         private bool _isPath;
 
         public bool IsPath
@@ -22,6 +31,8 @@ namespace Logic
             get { return _isField; }
             set { _isField = value; }
         }
+
+
 
     }
 }

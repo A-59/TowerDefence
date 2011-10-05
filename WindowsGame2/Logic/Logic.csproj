@@ -33,6 +33,9 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -40,16 +43,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Block.cs" />
-    <Compile Include="BlockProperties.cs" />
-    <Compile Include="Gamer.cs" />
-    <Compile Include="Map.cs" />
     <Compile Include="Monster.cs" />
-    <Compile Include="MonsterEffect.cs" />
-    <Compile Include="Point.cs" />
+    <Compile Include="OldClasses\Block.cs" />
+    <Compile Include="OldClasses\BlockProperties.cs" />
+    <Compile Include="DAL\ModelDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ModelDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="OldClasses\Gamer.cs" />
+    <Compile Include="OldClasses\Map.cs" />
+    <Compile Include="OldClasses\Monster.cs" />
+    <Compile Include="OldClasses\MonsterEffect.cs" />
+    <Compile Include="OldClasses\Point.cs" />
+    <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Tower.cs" />
-    <Compile Include="TowerEffect.cs" />
+    <Compile Include="OldClasses\Tower.cs" />
+    <Compile Include="OldClasses\TowerEffect.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="DAL\ModelDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ModelDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

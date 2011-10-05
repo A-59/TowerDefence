@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="GameDBModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="BasicMonsters">
+      <EntityTypeMapping TypeName="GameDBModel.BasicMonster">
+        <MappingFragment StoreEntitySet="BasicMonsters">
+          <ScalarProperty Name="Lvl" ColumnName="Lvl" />
+          <ScalarProperty Name="Money" ColumnName="Money" />
+          <ScalarProperty Name="Texture" ColumnName="Texture" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="SkillsId" ColumnName="SkillsId" />
+          <ScalarProperty Name="Speed" ColumnName="Speed" />
+          <ScalarProperty Name="Armor" ColumnName="Armor" />
+          <ScalarProperty Name="Health" ColumnName="Health" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Effects">
+      <EntityTypeMapping TypeName="GameDBModel.Effect">
+        <MappingFragment StoreEntitySet="Effects">
+          <ScalarProperty Name="PoisonDamage" ColumnName="PoisonDamage" />
+          <ScalarProperty Name="PoisonTime" ColumnName="PoisonTime" />
+          <ScalarProperty Name="PoisonProbability" ColumnName="PoisonProbability" />
+          <ScalarProperty Name="IceDamage" ColumnName="IceDamage" />
+          <ScalarProperty Name="IceTime" ColumnName="IceTime" />
+          <ScalarProperty Name="IceProbability" ColumnName="IceProbability" />
+          <ScalarProperty Name="FireDamage" ColumnName="FireDamage" />
+          <ScalarProperty Name="FireTime" ColumnName="FireTime" />
+          <ScalarProperty Name="FireProbability" ColumnName="FireProbability" />
+          <ScalarProperty Name="ShockTime" ColumnName="ShockTime" />
+          <ScalarProperty Name="ShockProbability" ColumnName="ShockProbability" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Levels">
+      <EntityTypeMapping TypeName="GameDBModel.Level">
+        <MappingFragment StoreEntitySet="Levels">
+          <ScalarProperty Name="WaveId" ColumnName="WaveId" />
+          <ScalarProperty Name="Waves" ColumnName="Waves" />
+          <ScalarProperty Name="MapId" ColumnName="MapId" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MapBlocks">
+      <EntityTypeMapping TypeName="GameDBModel.MapBlock">
+        <MappingFragment StoreEntitySet="MapBlocks">
+          <ScalarProperty Name="Block" ColumnName="Block" />
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Maps">
+      <EntityTypeMapping TypeName="GameDBModel.Map">
+        <MappingFragment StoreEntitySet="Maps">
+          <ScalarProperty Name="PointOnBlock" ColumnName="PointOnBlock" />
+          <ScalarProperty Name="Height" ColumnName="Height" />
+          <ScalarProperty Name="Widht" ColumnName="Widht" />
+          <ScalarProperty Name="PathId" ColumnName="PathId" />
+          <ScalarProperty Name="MapBlocksId" ColumnName="MapBlocksId" />
+          <ScalarProperty Name="Texture" ColumnName="Texture" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paths">
+      <EntityTypeMapping TypeName="GameDBModel.Path">
+        <MappingFragment StoreEntitySet="Paths">
+          <ScalarProperty Name="Y" ColumnName="Y" />
+          <ScalarProperty Name="X" ColumnName="X" />
+          <ScalarProperty Name="Number" ColumnName="Number" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Records">
+      <EntityTypeMapping TypeName="GameDBModel.Record">
+        <MappingFragment StoreEntitySet="Records">
+          <ScalarProperty Name="LevelId" ColumnName="LevelId" />
+          <ScalarProperty Name="Score" ColumnName="Score" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Skills">
+      <EntityTypeMapping TypeName="GameDBModel.Skill">
+        <MappingFragment StoreEntitySet="Skills">
+          <ScalarProperty Name="AntiPoison" ColumnName="AntiPoison" />
+          <ScalarProperty Name="AntiShock" ColumnName="AntiShock" />
+          <ScalarProperty Name="AntiFire" ColumnName="AntiFire" />
+          <ScalarProperty Name="AntiIce" ColumnName="AntiIce" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Towers">
+      <EntityTypeMapping TypeName="GameDBModel.Tower">
+        <MappingFragment StoreEntitySet="Towers">
+          <ScalarProperty Name="Points" ColumnName="Points" />
+          <ScalarProperty Name="Lvl" ColumnName="Lvl" />
+          <ScalarProperty Name="ShotTexture" ColumnName="ShotTexture" />
+          <ScalarProperty Name="ShotModel" ColumnName="ShotModel" />
+          <ScalarProperty Name="Texture" ColumnName="Texture" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="Sell" ColumnName="Sell" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="PriceNextLevel" ColumnName="PriceNextLevel" />
+          <ScalarProperty Name="EffectId" ColumnName="EffectId" />
+          <ScalarProperty Name="Range" ColumnName="Range" />
+          <ScalarProperty Name="Reload" ColumnName="Reload" />
+          <ScalarProperty Name="Damage" ColumnName="Damage" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Waves">
+      <EntityTypeMapping TypeName="GameDBModel.Wave">
+        <MappingFragment StoreEntitySet="Waves">
+          <ScalarProperty Name="TimeReload" ColumnName="TimeReload" />
+          <ScalarProperty Name="TimeWave" ColumnName="TimeWave" />
+          <ScalarProperty Name="MonsterNumber" ColumnName="MonsterNumber" />
+          <ScalarProperty Name="MonsterId" ColumnName="MonsterId" />
+          <ScalarProperty Name="WaveNumber" ColumnName="WaveNumber" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

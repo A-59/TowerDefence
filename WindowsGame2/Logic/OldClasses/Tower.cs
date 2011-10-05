@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logic
+namespace LogicOld
 {
     public class Tower
     {
-        // 'это тестовый коментария для github
-
         #region Properties
 
         private string _name;

@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logic
+namespace LogicOld
 {
     public class Monster
     {
-        // 'это тестовый коментария для github
+
         #region Properties
 
         private int _idMonster;

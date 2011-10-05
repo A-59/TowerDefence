@@ -3,8 +3,4 @@ D:\Pizdec\WindowsGame2\Logic\bin\Debug\Logic.dll
 D:\Pizdec\WindowsGame2\Logic\bin\Debug\Logic.pdb
 D:\Pizdec\WindowsGame2\Logic\obj\Debug\Logic.dll
 D:\Pizdec\WindowsGame2\Logic\obj\Debug\Logic.pdb
-C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\Logic\bin\Debug\Logic.dll
-C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\Logic\bin\Debug\Logic.pdb
-C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\Logic\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\Logic\obj\Debug\Logic.dll
-C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\Logic\obj\Debug\Logic.pdb
+D:\Pizdec\WindowsGame2\Logic\bin\Debug\Logic.dll.config

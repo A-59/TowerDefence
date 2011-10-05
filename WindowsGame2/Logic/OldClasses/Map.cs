@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logic
+namespace LogicOld
 {
     public class Map
     {
-        // 'это тестовый коментария для github
-
         private int _wight;
 
         public int Wight

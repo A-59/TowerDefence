@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace Logic
+namespace LogicOld
 {
-    public class Point
+    public class TowerEffect
     {
-        int X;
-        int Y;
+
     }
 }
