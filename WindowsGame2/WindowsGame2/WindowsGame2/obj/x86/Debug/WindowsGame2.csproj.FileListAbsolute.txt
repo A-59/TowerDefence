@@ -14,3 +14,11 @@ C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86
 C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86\Debug\WindowsGame2.exe
 C:\Users\Ragnor\.ssh\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86\Debug\WindowsGame2.pdb
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\bin\x86\Debug\WindowsGame2.exe
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\bin\x86\Debug\WindowsGame2.pdb
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\bin\x86\Debug\Logic.dll
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\bin\x86\Debug\Logic.pdb
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86\Debug\WindowsGame2.exe
+D:\Pizdec\TowerDefence\WindowsGame2\WindowsGame2\WindowsGame2\obj\x86\Debug\WindowsGame2.pdb

@@ -2,6 +2,7 @@
 <Schema Namespace="GameDBModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
   <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="BasicMonsters" EntityType="GameDBModel.BasicMonster" />
+    <EntitySet Name="BasicTowers" EntityType="GameDBModel.BasicTower" />
     <EntitySet Name="Effects" EntityType="GameDBModel.Effect" />
     <EntitySet Name="Levels" EntityType="GameDBModel.Level" />
     <EntitySet Name="MapBlocks" EntityType="GameDBModel.MapBlock" />
@@ -9,7 +10,6 @@
     <EntitySet Name="Paths" EntityType="GameDBModel.Path" />
     <EntitySet Name="Records" EntityType="GameDBModel.Record" />
     <EntitySet Name="Skills" EntityType="GameDBModel.Skill" />
-    <EntitySet Name="Towers" EntityType="GameDBModel.Tower" />
     <EntitySet Name="Waves" EntityType="GameDBModel.Wave" />
     <AssociationSet Name="FK_BasicMonsters_Skills" Association="GameDBModel.FK_BasicMonsters_Skills">
       <End Role="Skill" EntitySet="Skills" />
@@ -21,15 +21,15 @@
     </AssociationSet>
     <AssociationSet Name="FK_Towers_Effects" Association="GameDBModel.FK_Towers_Effects">
       <End Role="Effect" EntitySet="Effects" />
-      <End Role="Tower" EntitySet="Towers" />
+      <End Role="BasicTower" EntitySet="BasicTowers" />
     </AssociationSet>
     <AssociationSet Name="FK_Levels_Maps" Association="GameDBModel.FK_Levels_Maps">
       <End Role="Map" EntitySet="Maps" />
       <End Role="Level" EntitySet="Levels" />
     </AssociationSet>
-    <AssociationSet Name="FK_Levels_Waves" Association="GameDBModel.FK_Levels_Waves">
-      <End Role="Wave" EntitySet="Waves" />
+    <AssociationSet Name="FK_Waves_Levels" Association="GameDBModel.FK_Waves_Levels">
       <End Role="Level" EntitySet="Levels" />
+      <End Role="Wave" EntitySet="Waves" />
     </AssociationSet>
     <AssociationSet Name="FK_Maps_MapBlocks" Association="GameDBModel.FK_Maps_MapBlocks">
       <End Role="MapBlock" EntitySet="MapBlocks" />
@@ -57,6 +57,27 @@
     <NavigationProperty Name="Skill" Relationship="GameDBModel.FK_BasicMonsters_Skills" FromRole="BasicMonster" ToRole="Skill" />
     <NavigationProperty Name="Waves" Relationship="GameDBModel.FK_Waves_BasicMonsters" FromRole="BasicMonster" ToRole="Wave" />
   </EntityType>
+  <EntityType Name="BasicTower">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Damage" Nullable="false" />
+    <Property Type="Double" Name="Reload" Nullable="false" />
+    <Property Type="Double" Name="Range" Nullable="false" />
+    <Property Type="Int32" Name="EffectId" Nullable="false" />
+    <Property Type="Int32" Name="PriceNextLevel" Nullable="false" />
+    <Property Type="Int32" Name="Price" Nullable="false" />
+    <Property Type="Int32" Name="Sell" Nullable="false" />
+    <Property Type="String" Name="Model" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="Texture" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ShotModel" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="String" Name="ShotTexture" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Type="Int32" Name="Lvl" Nullable="false" />
+    <Property Type="Int32" Name="Points" Nullable="false" />
+    <NavigationProperty Name="Effect" Relationship="GameDBModel.FK_Towers_Effects" FromRole="BasicTower" ToRole="Effect" />
+  </EntityType>
   <EntityType Name="Effect">
     <Key>
       <PropertyRef Name="Id" />
@@ -73,7 +94,7 @@
     <Property Type="Double" Name="PoisonProbability" Nullable="false" />
     <Property Type="Int32" Name="PoisonTime" Nullable="false" />
     <Property Type="Int32" Name="PoisonDamage" Nullable="false" />
-    <NavigationProperty Name="Towers" Relationship="GameDBModel.FK_Towers_Effects" FromRole="Effect" ToRole="Tower" />
+    <NavigationProperty Name="BasicTowers" Relationship="GameDBModel.FK_Towers_Effects" FromRole="Effect" ToRole="BasicTower" />
   </EntityType>
   <EntityType Name="Level">
     <Key>
@@ -84,7 +105,7 @@
     <Property Type="Int32" Name="Waves" Nullable="false" />
     <Property Type="Int32" Name="WaveId" Nullable="false" />
     <NavigationProperty Name="Map" Relationship="GameDBModel.FK_Levels_Maps" FromRole="Level" ToRole="Map" />
-    <NavigationProperty Name="Wave" Relationship="GameDBModel.FK_Levels_Waves" FromRole="Level" ToRole="Wave" />
+    <NavigationProperty Name="Waves1" Relationship="GameDBModel.FK_Waves_Levels" FromRole="Level" ToRole="Wave" />
   </EntityType>
   <EntityType Name="MapBlock">
     <Key>
@@ -144,27 +165,6 @@
     <Property Type="Double" Name="AntiPoison" Nullable="false" />
     <NavigationProperty Name="BasicMonsters" Relationship="GameDBModel.FK_BasicMonsters_Skills" FromRole="Skill" ToRole="BasicMonster" />
   </EntityType>
-  <EntityType Name="Tower">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Type="Int32" Name="Id" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Type="String" Name="Name" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="Damage" Nullable="false" />
-    <Property Type="Double" Name="Reload" Nullable="false" />
-    <Property Type="Double" Name="Range" Nullable="false" />
-    <Property Type="Int32" Name="EffectId" Nullable="false" />
-    <Property Type="Int32" Name="PriceNextLevel" Nullable="false" />
-    <Property Type="Int32" Name="Price" Nullable="false" />
-    <Property Type="Int32" Name="Sell" Nullable="false" />
-    <Property Type="String" Name="Model" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="Texture" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="ShotModel" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="String" Name="ShotTexture" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Type="Int32" Name="Lvl" Nullable="false" />
-    <Property Type="Int32" Name="Points" Nullable="false" />
-    <NavigationProperty Name="Effect" Relationship="GameDBModel.FK_Towers_Effects" FromRole="Tower" ToRole="Effect" />
-  </EntityType>
   <EntityType Name="Wave">
     <Key>
       <PropertyRef Name="Id" />
@@ -175,8 +175,9 @@
     <Property Type="Int32" Name="MonsterNumber" Nullable="false" />
     <Property Type="Int32" Name="TimeWave" Nullable="false" />
     <Property Type="Int32" Name="TimeReload" Nullable="false" />
+    <Property Type="Int32" Name="LevelId" Nullable="false" />
     <NavigationProperty Name="BasicMonster" Relationship="GameDBModel.FK_Waves_BasicMonsters" FromRole="Wave" ToRole="BasicMonster" />
-    <NavigationProperty Name="Levels" Relationship="GameDBModel.FK_Levels_Waves" FromRole="Wave" ToRole="Level" />
+    <NavigationProperty Name="Level" Relationship="GameDBModel.FK_Waves_Levels" FromRole="Wave" ToRole="Level" />
   </EntityType>
   <Association Name="FK_BasicMonsters_Skills">
     <End Type="GameDBModel.Skill" Role="Skill" Multiplicity="1" />
@@ -204,12 +205,12 @@
   </Association>
   <Association Name="FK_Towers_Effects">
     <End Type="GameDBModel.Effect" Role="Effect" Multiplicity="1" />
-    <End Type="GameDBModel.Tower" Role="Tower" Multiplicity="*" />
+    <End Type="GameDBModel.BasicTower" Role="BasicTower" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Effect">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Tower">
+      <Dependent Role="BasicTower">
         <PropertyRef Name="EffectId" />
       </Dependent>
     </ReferentialConstraint>
@@ -226,15 +227,15 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_Levels_Waves">
-    <End Type="GameDBModel.Wave" Role="Wave" Multiplicity="1" />
-    <End Type="GameDBModel.Level" Role="Level" Multiplicity="*" />
+  <Association Name="FK_Waves_Levels">
+    <End Type="GameDBModel.Level" Role="Level" Multiplicity="1" />
+    <End Type="GameDBModel.Wave" Role="Wave" Multiplicity="*" />
     <ReferentialConstraint>
-      <Principal Role="Wave">
+      <Principal Role="Level">
         <PropertyRef Name="Id" />
       </Principal>
-      <Dependent Role="Level">
-        <PropertyRef Name="WaveId" />
+      <Dependent Role="Wave">
+        <PropertyRef Name="LevelId" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

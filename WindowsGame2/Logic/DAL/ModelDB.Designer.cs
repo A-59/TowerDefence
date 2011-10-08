@@ -20,9 +20,9 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("GameDBModel", "FK_BasicMonsters_Skills", "Skill", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.Skill), "BasicMonster", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.BasicMonster), true)]
 [assembly: EdmRelationshipAttribute("GameDBModel", "FK_Waves_BasicMonsters", "BasicMonster", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.BasicMonster), "Wave", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.Wave), true)]
-[assembly: EdmRelationshipAttribute("GameDBModel", "FK_Towers_Effects", "Effect", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.Effect), "Tower", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.Tower), true)]
+[assembly: EdmRelationshipAttribute("GameDBModel", "FK_Towers_Effects", "Effect", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.Effect), "BasicTower", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.BasicTower), true)]
 [assembly: EdmRelationshipAttribute("GameDBModel", "FK_Levels_Maps", "Map", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.Map), "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.Level), true)]
-[assembly: EdmRelationshipAttribute("GameDBModel", "FK_Levels_Waves", "Wave", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.Wave), "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.Level), true)]
+[assembly: EdmRelationshipAttribute("GameDBModel", "FK_Waves_Levels", "Level", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.Level), "Wave", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.Wave), true)]
 [assembly: EdmRelationshipAttribute("GameDBModel", "FK_Maps_MapBlocks", "MapBlock", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.MapBlock), "Map", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.Map), true)]
 [assembly: EdmRelationshipAttribute("GameDBModel", "FK_Maps_Paths", "Path", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Logic.DAL.Path), "Map", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(Logic.DAL.Map), true)]
 
@@ -91,6 +91,22 @@ namespace Logic.DAL
             }
         }
         private ObjectSet<BasicMonster> _BasicMonsters;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BasicTower> BasicTowers
+        {
+            get
+            {
+                if ((_BasicTowers == null))
+                {
+                    _BasicTowers = base.CreateObjectSet<BasicTower>("BasicTowers");
+                }
+                return _BasicTowers;
+            }
+        }
+        private ObjectSet<BasicTower> _BasicTowers;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -207,22 +223,6 @@ namespace Logic.DAL
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Tower> Towers
-        {
-            get
-            {
-                if ((_Towers == null))
-                {
-                    _Towers = base.CreateObjectSet<Tower>("Towers");
-                }
-                return _Towers;
-            }
-        }
-        private ObjectSet<Tower> _Towers;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<Wave> Waves
         {
             get
@@ -245,6 +245,14 @@ namespace Logic.DAL
         public void AddToBasicMonsters(BasicMonster basicMonster)
         {
             base.AddObject("BasicMonsters", basicMonster);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BasicTowers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBasicTowers(BasicTower basicTower)
+        {
+            base.AddObject("BasicTowers", basicTower);
         }
     
         /// <summary>
@@ -301,14 +309,6 @@ namespace Logic.DAL
         public void AddToSkills(Skill skill)
         {
             base.AddObject("Skills", skill);
-        }
-    
-        /// <summary>
-        /// Deprecated Method for adding a new object to the Towers EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToTowers(Tower tower)
-        {
-            base.AddObject("Towers", tower);
         }
     
         /// <summary>
@@ -682,6 +682,466 @@ namespace Logic.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="GameDBModel", Name="BasicTower")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class BasicTower : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new BasicTower object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        /// <param name="name">Initial value of the Name property.</param>
+        /// <param name="damage">Initial value of the Damage property.</param>
+        /// <param name="reload">Initial value of the Reload property.</param>
+        /// <param name="range">Initial value of the Range property.</param>
+        /// <param name="effectId">Initial value of the EffectId property.</param>
+        /// <param name="priceNextLevel">Initial value of the PriceNextLevel property.</param>
+        /// <param name="price">Initial value of the Price property.</param>
+        /// <param name="sell">Initial value of the Sell property.</param>
+        /// <param name="model">Initial value of the Model property.</param>
+        /// <param name="texture">Initial value of the Texture property.</param>
+        /// <param name="shotModel">Initial value of the ShotModel property.</param>
+        /// <param name="shotTexture">Initial value of the ShotTexture property.</param>
+        /// <param name="lvl">Initial value of the Lvl property.</param>
+        /// <param name="points">Initial value of the Points property.</param>
+        public static BasicTower CreateBasicTower(global::System.Int32 id, global::System.String name, global::System.Int32 damage, global::System.Double reload, global::System.Double range, global::System.Int32 effectId, global::System.Int32 priceNextLevel, global::System.Int32 price, global::System.Int32 sell, global::System.String model, global::System.String texture, global::System.String shotModel, global::System.String shotTexture, global::System.Int32 lvl, global::System.Int32 points)
+        {
+            BasicTower basicTower = new BasicTower();
+            basicTower.Id = id;
+            basicTower.Name = name;
+            basicTower.Damage = damage;
+            basicTower.Reload = reload;
+            basicTower.Range = range;
+            basicTower.EffectId = effectId;
+            basicTower.PriceNextLevel = priceNextLevel;
+            basicTower.Price = price;
+            basicTower.Sell = sell;
+            basicTower.Model = model;
+            basicTower.Texture = texture;
+            basicTower.ShotModel = shotModel;
+            basicTower.ShotTexture = shotTexture;
+            basicTower.Lvl = lvl;
+            basicTower.Points = points;
+            return basicTower;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Int32 _Id;
+        partial void OnIdChanging(global::System.Int32 value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Name
+        {
+            get
+            {
+                return _Name;
+            }
+            set
+            {
+                OnNameChanging(value);
+                ReportPropertyChanging("Name");
+                _Name = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Name");
+                OnNameChanged();
+            }
+        }
+        private global::System.String _Name;
+        partial void OnNameChanging(global::System.String value);
+        partial void OnNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Damage
+        {
+            get
+            {
+                return _Damage;
+            }
+            set
+            {
+                OnDamageChanging(value);
+                ReportPropertyChanging("Damage");
+                _Damage = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Damage");
+                OnDamageChanged();
+            }
+        }
+        private global::System.Int32 _Damage;
+        partial void OnDamageChanging(global::System.Int32 value);
+        partial void OnDamageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Reload
+        {
+            get
+            {
+                return _Reload;
+            }
+            set
+            {
+                OnReloadChanging(value);
+                ReportPropertyChanging("Reload");
+                _Reload = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Reload");
+                OnReloadChanged();
+            }
+        }
+        private global::System.Double _Reload;
+        partial void OnReloadChanging(global::System.Double value);
+        partial void OnReloadChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Double Range
+        {
+            get
+            {
+                return _Range;
+            }
+            set
+            {
+                OnRangeChanging(value);
+                ReportPropertyChanging("Range");
+                _Range = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Range");
+                OnRangeChanged();
+            }
+        }
+        private global::System.Double _Range;
+        partial void OnRangeChanging(global::System.Double value);
+        partial void OnRangeChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 EffectId
+        {
+            get
+            {
+                return _EffectId;
+            }
+            set
+            {
+                OnEffectIdChanging(value);
+                ReportPropertyChanging("EffectId");
+                _EffectId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("EffectId");
+                OnEffectIdChanged();
+            }
+        }
+        private global::System.Int32 _EffectId;
+        partial void OnEffectIdChanging(global::System.Int32 value);
+        partial void OnEffectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 PriceNextLevel
+        {
+            get
+            {
+                return _PriceNextLevel;
+            }
+            set
+            {
+                OnPriceNextLevelChanging(value);
+                ReportPropertyChanging("PriceNextLevel");
+                _PriceNextLevel = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PriceNextLevel");
+                OnPriceNextLevelChanged();
+            }
+        }
+        private global::System.Int32 _PriceNextLevel;
+        partial void OnPriceNextLevelChanging(global::System.Int32 value);
+        partial void OnPriceNextLevelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Price
+        {
+            get
+            {
+                return _Price;
+            }
+            set
+            {
+                OnPriceChanging(value);
+                ReportPropertyChanging("Price");
+                _Price = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Price");
+                OnPriceChanged();
+            }
+        }
+        private global::System.Int32 _Price;
+        partial void OnPriceChanging(global::System.Int32 value);
+        partial void OnPriceChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Sell
+        {
+            get
+            {
+                return _Sell;
+            }
+            set
+            {
+                OnSellChanging(value);
+                ReportPropertyChanging("Sell");
+                _Sell = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Sell");
+                OnSellChanged();
+            }
+        }
+        private global::System.Int32 _Sell;
+        partial void OnSellChanging(global::System.Int32 value);
+        partial void OnSellChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Model
+        {
+            get
+            {
+                return _Model;
+            }
+            set
+            {
+                OnModelChanging(value);
+                ReportPropertyChanging("Model");
+                _Model = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Model");
+                OnModelChanged();
+            }
+        }
+        private global::System.String _Model;
+        partial void OnModelChanging(global::System.String value);
+        partial void OnModelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String Texture
+        {
+            get
+            {
+                return _Texture;
+            }
+            set
+            {
+                OnTextureChanging(value);
+                ReportPropertyChanging("Texture");
+                _Texture = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("Texture");
+                OnTextureChanged();
+            }
+        }
+        private global::System.String _Texture;
+        partial void OnTextureChanging(global::System.String value);
+        partial void OnTextureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ShotModel
+        {
+            get
+            {
+                return _ShotModel;
+            }
+            set
+            {
+                OnShotModelChanging(value);
+                ReportPropertyChanging("ShotModel");
+                _ShotModel = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ShotModel");
+                OnShotModelChanged();
+            }
+        }
+        private global::System.String _ShotModel;
+        partial void OnShotModelChanging(global::System.String value);
+        partial void OnShotModelChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.String ShotTexture
+        {
+            get
+            {
+                return _ShotTexture;
+            }
+            set
+            {
+                OnShotTextureChanging(value);
+                ReportPropertyChanging("ShotTexture");
+                _ShotTexture = StructuralObject.SetValidValue(value, false);
+                ReportPropertyChanged("ShotTexture");
+                OnShotTextureChanged();
+            }
+        }
+        private global::System.String _ShotTexture;
+        partial void OnShotTextureChanging(global::System.String value);
+        partial void OnShotTextureChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Lvl
+        {
+            get
+            {
+                return _Lvl;
+            }
+            set
+            {
+                OnLvlChanging(value);
+                ReportPropertyChanging("Lvl");
+                _Lvl = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Lvl");
+                OnLvlChanged();
+            }
+        }
+        private global::System.Int32 _Lvl;
+        partial void OnLvlChanging(global::System.Int32 value);
+        partial void OnLvlChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 Points
+        {
+            get
+            {
+                return _Points;
+            }
+            set
+            {
+                OnPointsChanging(value);
+                ReportPropertyChanging("Points");
+                _Points = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Points");
+                OnPointsChanged();
+            }
+        }
+        private global::System.Int32 _Points;
+        partial void OnPointsChanging(global::System.Int32 value);
+        partial void OnPointsChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Towers_Effects", "Effect")]
+        public Effect Effect
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Effect> EffectReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="GameDBModel", Name="Effect")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1026,18 +1486,18 @@ namespace Logic.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Towers_Effects", "Tower")]
-        public EntityCollection<Tower> Towers
+        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Towers_Effects", "BasicTower")]
+        public EntityCollection<BasicTower> BasicTowers
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Tower>("GameDBModel.FK_Towers_Effects", "Tower");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<BasicTower>("GameDBModel.FK_Towers_Effects", "BasicTower");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Tower>("GameDBModel.FK_Towers_Effects", "Tower", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<BasicTower>("GameDBModel.FK_Towers_Effects", "BasicTower", value);
                 }
             }
         }
@@ -1222,34 +1682,18 @@ namespace Logic.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Levels_Waves", "Wave")]
-        public Wave Wave
+        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Waves_Levels", "Wave")]
+        public EntityCollection<Wave> Waves1
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Wave>("GameDBModel.FK_Levels_Waves", "Wave").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Wave>("GameDBModel.FK_Levels_Waves", "Wave").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Wave> WaveReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Wave>("GameDBModel.FK_Levels_Waves", "Wave");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Wave>("GameDBModel.FK_Waves_Levels", "Wave");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Wave>("GameDBModel.FK_Levels_Waves", "Wave", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Wave>("GameDBModel.FK_Waves_Levels", "Wave", value);
                 }
             }
         }
@@ -2283,466 +2727,6 @@ namespace Logic.DAL
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="GameDBModel", Name="Tower")]
-    [Serializable()]
-    [DataContractAttribute(IsReference=true)]
-    public partial class Tower : EntityObject
-    {
-        #region Factory Method
-    
-        /// <summary>
-        /// Create a new Tower object.
-        /// </summary>
-        /// <param name="id">Initial value of the Id property.</param>
-        /// <param name="name">Initial value of the Name property.</param>
-        /// <param name="damage">Initial value of the Damage property.</param>
-        /// <param name="reload">Initial value of the Reload property.</param>
-        /// <param name="range">Initial value of the Range property.</param>
-        /// <param name="effectId">Initial value of the EffectId property.</param>
-        /// <param name="priceNextLevel">Initial value of the PriceNextLevel property.</param>
-        /// <param name="price">Initial value of the Price property.</param>
-        /// <param name="sell">Initial value of the Sell property.</param>
-        /// <param name="model">Initial value of the Model property.</param>
-        /// <param name="texture">Initial value of the Texture property.</param>
-        /// <param name="shotModel">Initial value of the ShotModel property.</param>
-        /// <param name="shotTexture">Initial value of the ShotTexture property.</param>
-        /// <param name="lvl">Initial value of the Lvl property.</param>
-        /// <param name="points">Initial value of the Points property.</param>
-        public static Tower CreateTower(global::System.Int32 id, global::System.String name, global::System.Int32 damage, global::System.Double reload, global::System.Double range, global::System.Int32 effectId, global::System.Int32 priceNextLevel, global::System.Int32 price, global::System.Int32 sell, global::System.String model, global::System.String texture, global::System.String shotModel, global::System.String shotTexture, global::System.Int32 lvl, global::System.Int32 points)
-        {
-            Tower tower = new Tower();
-            tower.Id = id;
-            tower.Name = name;
-            tower.Damage = damage;
-            tower.Reload = reload;
-            tower.Range = range;
-            tower.EffectId = effectId;
-            tower.PriceNextLevel = priceNextLevel;
-            tower.Price = price;
-            tower.Sell = sell;
-            tower.Model = model;
-            tower.Texture = texture;
-            tower.ShotModel = shotModel;
-            tower.ShotTexture = shotTexture;
-            tower.Lvl = lvl;
-            tower.Points = points;
-            return tower;
-        }
-
-        #endregion
-        #region Primitive Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Id
-        {
-            get
-            {
-                return _Id;
-            }
-            set
-            {
-                if (_Id != value)
-                {
-                    OnIdChanging(value);
-                    ReportPropertyChanging("Id");
-                    _Id = StructuralObject.SetValidValue(value);
-                    ReportPropertyChanged("Id");
-                    OnIdChanged();
-                }
-            }
-        }
-        private global::System.Int32 _Id;
-        partial void OnIdChanging(global::System.Int32 value);
-        partial void OnIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Name
-        {
-            get
-            {
-                return _Name;
-            }
-            set
-            {
-                OnNameChanging(value);
-                ReportPropertyChanging("Name");
-                _Name = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Name");
-                OnNameChanged();
-            }
-        }
-        private global::System.String _Name;
-        partial void OnNameChanging(global::System.String value);
-        partial void OnNameChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Damage
-        {
-            get
-            {
-                return _Damage;
-            }
-            set
-            {
-                OnDamageChanging(value);
-                ReportPropertyChanging("Damage");
-                _Damage = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Damage");
-                OnDamageChanged();
-            }
-        }
-        private global::System.Int32 _Damage;
-        partial void OnDamageChanging(global::System.Int32 value);
-        partial void OnDamageChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Reload
-        {
-            get
-            {
-                return _Reload;
-            }
-            set
-            {
-                OnReloadChanging(value);
-                ReportPropertyChanging("Reload");
-                _Reload = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Reload");
-                OnReloadChanged();
-            }
-        }
-        private global::System.Double _Reload;
-        partial void OnReloadChanging(global::System.Double value);
-        partial void OnReloadChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Double Range
-        {
-            get
-            {
-                return _Range;
-            }
-            set
-            {
-                OnRangeChanging(value);
-                ReportPropertyChanging("Range");
-                _Range = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Range");
-                OnRangeChanged();
-            }
-        }
-        private global::System.Double _Range;
-        partial void OnRangeChanging(global::System.Double value);
-        partial void OnRangeChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 EffectId
-        {
-            get
-            {
-                return _EffectId;
-            }
-            set
-            {
-                OnEffectIdChanging(value);
-                ReportPropertyChanging("EffectId");
-                _EffectId = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("EffectId");
-                OnEffectIdChanged();
-            }
-        }
-        private global::System.Int32 _EffectId;
-        partial void OnEffectIdChanging(global::System.Int32 value);
-        partial void OnEffectIdChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 PriceNextLevel
-        {
-            get
-            {
-                return _PriceNextLevel;
-            }
-            set
-            {
-                OnPriceNextLevelChanging(value);
-                ReportPropertyChanging("PriceNextLevel");
-                _PriceNextLevel = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("PriceNextLevel");
-                OnPriceNextLevelChanged();
-            }
-        }
-        private global::System.Int32 _PriceNextLevel;
-        partial void OnPriceNextLevelChanging(global::System.Int32 value);
-        partial void OnPriceNextLevelChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Price
-        {
-            get
-            {
-                return _Price;
-            }
-            set
-            {
-                OnPriceChanging(value);
-                ReportPropertyChanging("Price");
-                _Price = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Price");
-                OnPriceChanged();
-            }
-        }
-        private global::System.Int32 _Price;
-        partial void OnPriceChanging(global::System.Int32 value);
-        partial void OnPriceChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Sell
-        {
-            get
-            {
-                return _Sell;
-            }
-            set
-            {
-                OnSellChanging(value);
-                ReportPropertyChanging("Sell");
-                _Sell = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Sell");
-                OnSellChanged();
-            }
-        }
-        private global::System.Int32 _Sell;
-        partial void OnSellChanging(global::System.Int32 value);
-        partial void OnSellChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Model
-        {
-            get
-            {
-                return _Model;
-            }
-            set
-            {
-                OnModelChanging(value);
-                ReportPropertyChanging("Model");
-                _Model = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Model");
-                OnModelChanged();
-            }
-        }
-        private global::System.String _Model;
-        partial void OnModelChanging(global::System.String value);
-        partial void OnModelChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String Texture
-        {
-            get
-            {
-                return _Texture;
-            }
-            set
-            {
-                OnTextureChanging(value);
-                ReportPropertyChanging("Texture");
-                _Texture = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("Texture");
-                OnTextureChanged();
-            }
-        }
-        private global::System.String _Texture;
-        partial void OnTextureChanging(global::System.String value);
-        partial void OnTextureChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ShotModel
-        {
-            get
-            {
-                return _ShotModel;
-            }
-            set
-            {
-                OnShotModelChanging(value);
-                ReportPropertyChanging("ShotModel");
-                _ShotModel = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ShotModel");
-                OnShotModelChanged();
-            }
-        }
-        private global::System.String _ShotModel;
-        partial void OnShotModelChanging(global::System.String value);
-        partial void OnShotModelChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.String ShotTexture
-        {
-            get
-            {
-                return _ShotTexture;
-            }
-            set
-            {
-                OnShotTextureChanging(value);
-                ReportPropertyChanging("ShotTexture");
-                _ShotTexture = StructuralObject.SetValidValue(value, false);
-                ReportPropertyChanged("ShotTexture");
-                OnShotTextureChanged();
-            }
-        }
-        private global::System.String _ShotTexture;
-        partial void OnShotTextureChanging(global::System.String value);
-        partial void OnShotTextureChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Lvl
-        {
-            get
-            {
-                return _Lvl;
-            }
-            set
-            {
-                OnLvlChanging(value);
-                ReportPropertyChanging("Lvl");
-                _Lvl = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Lvl");
-                OnLvlChanged();
-            }
-        }
-        private global::System.Int32 _Lvl;
-        partial void OnLvlChanging(global::System.Int32 value);
-        partial void OnLvlChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
-        [DataMemberAttribute()]
-        public global::System.Int32 Points
-        {
-            get
-            {
-                return _Points;
-            }
-            set
-            {
-                OnPointsChanging(value);
-                ReportPropertyChanging("Points");
-                _Points = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("Points");
-                OnPointsChanged();
-            }
-        }
-        private global::System.Int32 _Points;
-        partial void OnPointsChanging(global::System.Int32 value);
-        partial void OnPointsChanged();
-
-        #endregion
-    
-        #region Navigation Properties
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Towers_Effects", "Effect")]
-        public Effect Effect
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect").Value;
-            }
-            set
-            {
-                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect").Value = value;
-            }
-        }
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [BrowsableAttribute(false)]
-        [DataMemberAttribute()]
-        public EntityReference<Effect> EffectReference
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Effect>("GameDBModel.FK_Towers_Effects", "Effect", value);
-                }
-            }
-        }
-
-        #endregion
-    }
-    
-    /// <summary>
-    /// No Metadata Documentation available.
-    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="GameDBModel", Name="Wave")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -2759,7 +2743,8 @@ namespace Logic.DAL
         /// <param name="monsterNumber">Initial value of the MonsterNumber property.</param>
         /// <param name="timeWave">Initial value of the TimeWave property.</param>
         /// <param name="timeReload">Initial value of the TimeReload property.</param>
-        public static Wave CreateWave(global::System.Int32 id, global::System.Int32 waveNumber, global::System.Int32 monsterId, global::System.Int32 monsterNumber, global::System.Int32 timeWave, global::System.Int32 timeReload)
+        /// <param name="levelId">Initial value of the LevelId property.</param>
+        public static Wave CreateWave(global::System.Int32 id, global::System.Int32 waveNumber, global::System.Int32 monsterId, global::System.Int32 monsterNumber, global::System.Int32 timeWave, global::System.Int32 timeReload, global::System.Int32 levelId)
         {
             Wave wave = new Wave();
             wave.Id = id;
@@ -2768,6 +2753,7 @@ namespace Logic.DAL
             wave.MonsterNumber = monsterNumber;
             wave.TimeWave = timeWave;
             wave.TimeReload = timeReload;
+            wave.LevelId = levelId;
             return wave;
         }
 
@@ -2920,6 +2906,30 @@ namespace Logic.DAL
         private global::System.Int32 _TimeReload;
         partial void OnTimeReloadChanging(global::System.Int32 value);
         partial void OnTimeReloadChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 LevelId
+        {
+            get
+            {
+                return _LevelId;
+            }
+            set
+            {
+                OnLevelIdChanging(value);
+                ReportPropertyChanging("LevelId");
+                _LevelId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("LevelId");
+                OnLevelIdChanged();
+            }
+        }
+        private global::System.Int32 _LevelId;
+        partial void OnLevelIdChanging(global::System.Int32 value);
+        partial void OnLevelIdChanged();
 
         #endregion
     
@@ -2969,18 +2979,34 @@ namespace Logic.DAL
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Levels_Waves", "Level")]
-        public EntityCollection<Level> Levels
+        [EdmRelationshipNavigationPropertyAttribute("GameDBModel", "FK_Waves_Levels", "Level")]
+        public Level Level
         {
             get
             {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Level>("GameDBModel.FK_Levels_Waves", "Level");
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameDBModel.FK_Waves_Levels", "Level").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameDBModel.FK_Waves_Levels", "Level").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Level> LevelReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Level>("GameDBModel.FK_Waves_Levels", "Level");
             }
             set
             {
                 if ((value != null))
                 {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Level>("GameDBModel.FK_Levels_Waves", "Level", value);
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Level>("GameDBModel.FK_Waves_Levels", "Level", value);
                 }
             }
         }
